@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strings"
 	"testing"
 )
 
@@ -42,6 +43,12 @@ func testBadOptions(t *testing.T, methodName string, f func() error) {
 	}
 	if err := f(); err == nil {
 		t.Errorf("bad options %v err = nil, want error", methodName)
+	}
+}
+
+func testErrorContains(t *testing.T, e error, want string) {
+	if !strings.Contains(e.Error(), want) {
+		t.Errorf("testErrorContains: err message = %s, want %s", e.Error(), want)
 	}
 }
 

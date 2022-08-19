@@ -200,11 +200,33 @@ func TestIntradayService_Meta_IX0001(t *testing.T) {
 	testIntradayServiceMeta(t, raw, want)
 }
 
+func TestIntradayServiceMetaUnmarshalError(t *testing.T) {
+	client, mux, teardown := setup()
+	defer teardown()
+
+	url := fmt.Sprintf("/realtime/v%s/intraday/meta", client.apiVersion)
+	mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
+		testMethod(t, r, "GET")
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, `{\n}`)
+	})
+
+	_, err := client.Intrady.Meta("", false)
+	if e, ok := err.(*ErrorResponse); ok {
+		if e.Details.Code != 0 || e.Details.Message != "" {
+			t.Errorf("Intrady.Meta returned %v, want nil", *e)
+		}
+	} else {
+		t.Errorf("Intrady.Meta returned %v", err)
+	}
+}
+
 func testIntradayServiceMetaError(t *testing.T, statusCode int, raw string, want ErrorResponse) {
 	client, mux, teardown := setup()
 	defer teardown()
 
-	mux.HandleFunc(fmt.Sprintf("/realtime/v%s/intraday/meta", client.apiVersion), func(w http.ResponseWriter, r *http.Request) {
+	url := fmt.Sprintf("/realtime/v%s/intraday/meta", client.apiVersion)
+	mux.HandleFunc(url, func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
 		w.WriteHeader(statusCode)
 		fmt.Fprint(w, raw)
@@ -212,6 +234,9 @@ func testIntradayServiceMetaError(t *testing.T, statusCode int, raw string, want
 
 	_, err := client.Intrady.Meta("", false)
 	if e, ok := err.(*ErrorResponse); ok {
+		testErrorContains(t, e, url)
+		testErrorContains(t, &e.Details, want.Details.Message)
+
 		if !cmp.Equal(*e, want, cmpopts.IgnoreFields(ErrorResponse{}, "Response")) {
 			t.Errorf("Intrady.Meta returned %v, want %v", *e, want)
 		}

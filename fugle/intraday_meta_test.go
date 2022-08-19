@@ -50,7 +50,7 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 	client, mux, teardown := setup()
 	defer teardown()
 
-	mux.HandleFunc(fmt.Sprintf("/realtime/v%s/intraday/meta", apiVersion), func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc(fmt.Sprintf("/realtime/v%s/intraday/meta", client.apiVersion), func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
 		fmt.Fprint(w, raw)
 	})
@@ -62,6 +62,12 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 	if diff := cmp.Diff(*meta, want, cmp.AllowUnexported(InfoDate{})); diff != "" {
 		t.Errorf("Intrady.Meta mismatch (-want +got):\n%s", diff)
 	}
+	const methodName = "Meta"
+	testBadOptions(t, methodName, func() (err error) {
+		client.apiVersion = "\n"
+		_, err = client.Intrady.Meta("2330", nil)
+		return err
+	})
 }
 
 func TestIntradayService_Meta_2330(t *testing.T) {
@@ -198,7 +204,7 @@ func testIntradayServiceMetaError(t *testing.T, statusCode int, raw string, want
 	client, mux, teardown := setup()
 	defer teardown()
 
-	mux.HandleFunc(fmt.Sprintf("/realtime/v%s/intraday/meta", apiVersion), func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc(fmt.Sprintf("/realtime/v%s/intraday/meta", client.apiVersion), func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
 		w.WriteHeader(statusCode)
 		fmt.Fprint(w, raw)

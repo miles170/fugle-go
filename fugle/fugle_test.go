@@ -32,3 +32,15 @@ func testMethod(t *testing.T, r *http.Request, want string) {
 		t.Errorf("Request method: %v, want %v", got, want)
 	}
 }
+
+// Test how bad options are handled. Method f under test should
+// return an error.
+func testBadOptions(t *testing.T, methodName string, f func() error) {
+	t.Helper()
+	if methodName == "" {
+		t.Error("testBadOptions: must supply method methodName")
+	}
+	if err := f(); err == nil {
+		t.Errorf("bad options %v err = nil, want error", methodName)
+	}
+}

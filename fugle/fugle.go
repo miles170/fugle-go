@@ -13,11 +13,11 @@ import (
 )
 
 const (
-	Version    = "0.1.0"
-	apiVersion = "0.3"
+	Version = "0.1.0"
 
-	defaultBaseURL   = "https://api.fugle.tw/"
-	defaultUserAgent = "fugle-go" + "/" + Version
+	defaultBaseURL    = "https://api.fugle.tw/"
+	defaultUserAgent  = "fugle-go" + "/" + Version
+	defaultAPIVersion = "0.3"
 )
 
 // A Client manages communication with the Fugle API.
@@ -28,8 +28,11 @@ type Client struct {
 	// base URL for API requests.
 	baseURL *url.URL
 
-	// Api token used whe communicating with the Fugle API.
+	// Api token used when communicating with the Fugle API.
 	apiToken string
+
+	// Api version used when communicating with the Fugle API.
+	apiVersion string
 
 	// User agent used when communicating with the Fugle API.
 	userAgent string
@@ -66,7 +69,6 @@ func addOptions(s string, opts interface{}) (string, error) {
 	}
 
 	q := u.Query()
-	// merge query
 	for k, v := range qs {
 		q[k] = v
 	}
@@ -78,8 +80,13 @@ func addOptions(s string, opts interface{}) (string, error) {
 func NewClient(apiToken string) *Client {
 	httpClient := &http.Client{}
 	baseURL, _ := url.Parse(defaultBaseURL)
-
-	c := &Client{client: httpClient, baseURL: baseURL, apiToken: apiToken, userAgent: defaultUserAgent}
+	c := &Client{
+		client:     httpClient,
+		baseURL:    baseURL,
+		apiToken:   apiToken,
+		apiVersion: defaultAPIVersion,
+		userAgent:  defaultUserAgent,
+	}
 	c.Intrady = &IntradayService{client: c}
 	return c
 }

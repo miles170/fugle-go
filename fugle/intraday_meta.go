@@ -48,11 +48,12 @@ type MetaResponse struct {
 }
 
 func (s *IntradayService) Meta(symbolID string, opts *OddLotOptions) (*MetaResponse, error) {
-	u := fmt.Sprintf("realtime/v%s/intraday/meta", apiVersion)
+	u := fmt.Sprintf("realtime/v%s/intraday/meta", s.client.apiVersion)
 	u, err := addOptions(u, BasicOptions{SymbolID: symbolID, APIToken: s.client.apiToken})
 	if err != nil {
 		return nil, err
 	}
+
 	u, err = addOptions(u, opts)
 	if err != nil {
 		return nil, err

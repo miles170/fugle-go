@@ -59,8 +59,8 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 	if err != nil {
 		t.Errorf("Intrady.Meta returned error: %v", err)
 	}
-	if diff := cmp.Diff(*meta, want, cmp.AllowUnexported(InfoDate{})); diff != "" {
-		t.Errorf("Intrady.Meta mismatch (-want +got):\n%s", diff)
+	if !cmp.Equal(*meta, want, cmp.AllowUnexported(InfoDate{})) {
+		t.Errorf("Intrady.Meta returned %v, want %v", *meta, want)
 	}
 	const methodName = "Meta"
 	testBadOptions(t, methodName, func() (err error) {
@@ -212,8 +212,8 @@ func testIntradayServiceMetaError(t *testing.T, statusCode int, raw string, want
 
 	_, err := client.Intrady.Meta("", nil)
 	if e, ok := err.(*ErrorResponse); ok {
-		if diff := cmp.Diff(*e, want, cmpopts.IgnoreFields(ErrorResponse{}, "Response")); diff != "" {
-			t.Errorf("Intrady.Meta mismatch (-want +got):\n%s", diff)
+		if !cmp.Equal(*e, want, cmpopts.IgnoreFields(ErrorResponse{}, "Response")) {
+			t.Errorf("Intrady.Meta returned %v, want %v", *e, want)
 		}
 	} else {
 		t.Errorf("Intrady.Meta returned %v", err)

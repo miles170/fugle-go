@@ -44,3 +44,9 @@ func testBadOptions(t *testing.T, methodName string, f func() error) {
 		t.Errorf("bad options %v err = nil, want error", methodName)
 	}
 }
+
+func TestAddOptions_QueryValues(t *testing.T) {
+	if _, err := addOptions("yo", ""); err == nil {
+		t.Error("addOptions err = nil, want error")
+	}
+}

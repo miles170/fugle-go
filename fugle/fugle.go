@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"time"
 
 	"github.com/google/go-querystring/query"
 )
@@ -35,6 +36,15 @@ type Client struct {
 
 	// Services used for talking to different parts of the API
 	Intrady *IntradayService
+}
+
+type BasicOptions struct {
+	SymbolID string `url:"symbolId"`
+	APIToken string `url:"apiToken"`
+}
+
+type OddLotOptions struct {
+	OddLot bool `url:"oddLot"`
 }
 
 // addOptions adds the parameters in opts as URL query parameters to s. opts
@@ -106,6 +116,29 @@ func (c *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
 		err = json.NewDecoder(resp.Body).Decode(v)
 	}
 	return resp, err
+}
+
+type InfoDate time.Time
+
+// UnmarshalJSON handles incoming JSON.
+func (d *InfoDate) UnmarshalJSON(b []byte) error {
+	t, err := time.Parse("\"2006-01-02\"", string(b))
+	if err != nil {
+		return err
+	}
+	*d = InfoDate(t)
+	return nil
+}
+
+type Info struct {
+	Date          InfoDate   `json:"date"`
+	Type          string     `json:"type"`
+	Exchange      string     `json:"exchange"`
+	Market        string     `json:"market"`
+	SymbolID      string     `json:"symbolId"`
+	CountryCode   string     `json:"countryCode"`
+	TimeZone      string     `json:"timeZone"`
+	LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"` // (Optional.)
 }
 
 type ErrorResponse struct {

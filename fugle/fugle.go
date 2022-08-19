@@ -41,13 +41,10 @@ type Client struct {
 	Intrady *IntradayService
 }
 
-type BasicOptions struct {
+type IntradyOptions struct {
 	SymbolID string `url:"symbolId"`
 	APIToken string `url:"apiToken"`
-}
-
-type OddLotOptions struct {
-	OddLot bool `url:"oddLot"`
+	OddLot   bool   `url:"oddLot"`
 }
 
 // addOptions adds the parameters in opts as URL query parameters to s. opts

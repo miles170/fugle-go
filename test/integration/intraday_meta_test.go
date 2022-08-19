@@ -9,7 +9,7 @@ import (
 )
 
 func TestIntrady_Meta(t *testing.T) {
-	m, err := client.Intrady.Meta("2884", nil)
+	m, err := client.Intrady.Meta("2884", false)
 	if err != nil {
 		t.Fatalf("Meta returned error: %v", err)
 	}
@@ -19,7 +19,7 @@ func TestIntrady_Meta(t *testing.T) {
 	if m.Data.Info.SymbolID != "2884" {
 		t.Fatalf("Intrady.Meta returned symbolId: %s want %s", m.Data.Info.SymbolID, "2884")
 	}
-	m, err = client.Intrady.Meta("2884", &fugle.OddLotOptions{OddLot: true})
+	m, err = client.Intrady.Meta("2884", true)
 	if err != nil {
 		t.Fatalf("Meta returned error: %v", err)
 	}
@@ -32,7 +32,7 @@ func TestIntrady_Meta(t *testing.T) {
 }
 
 func testIntradyMetaError(t *testing.T, c *fugle.Client, symbolID string, want fugle.ErrorResponse) {
-	_, err := c.Intrady.Meta(symbolID, nil)
+	_, err := c.Intrady.Meta(symbolID, false)
 	if e, ok := err.(*fugle.ErrorResponse); ok {
 		if diff := cmp.Diff(*e, want, cmpopts.IgnoreFields(fugle.ErrorResponse{}, "Response")); diff != "" {
 			t.Errorf("Intrady.Meta mismatch (-want +got):\n%s", diff)

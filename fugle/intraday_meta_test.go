@@ -55,7 +55,7 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 		fmt.Fprint(w, raw)
 	})
 
-	meta, err := client.Intrady.Meta("2330", nil)
+	meta, err := client.Intrady.Meta("2330", false)
 	if err != nil {
 		t.Errorf("Intrady.Meta returned error: %v", err)
 	}
@@ -65,7 +65,7 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 	const methodName = "Meta"
 	testBadOptions(t, methodName, func() (err error) {
 		client.apiVersion = "\n"
-		_, err = client.Intrady.Meta("2330", nil)
+		_, err = client.Intrady.Meta("2330", false)
 		return err
 	})
 }
@@ -210,7 +210,7 @@ func testIntradayServiceMetaError(t *testing.T, statusCode int, raw string, want
 		fmt.Fprint(w, raw)
 	})
 
-	_, err := client.Intrady.Meta("", nil)
+	_, err := client.Intrady.Meta("", false)
 	if e, ok := err.(*ErrorResponse); ok {
 		if !cmp.Equal(*e, want, cmpopts.IgnoreFields(ErrorResponse{}, "Response")) {
 			t.Errorf("Intrady.Meta returned %v, want %v", *e, want)

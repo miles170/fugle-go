@@ -8,7 +8,7 @@ import (
 
 func main() {
 	client := fugle.NewClient("demo")
-	meta, err := client.Intrady.Meta("2884", nil)
+	meta, err := client.Intrady.Meta("2884", false)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return

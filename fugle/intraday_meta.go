@@ -47,14 +47,9 @@ type MetaResponse struct {
 	Data       MetaData `json:"data"`
 }
 
-func (s *IntradayService) Meta(symbolID string, opts *OddLotOptions) (*MetaResponse, error) {
+func (s *IntradayService) Meta(symbolID string, oddLot bool) (*MetaResponse, error) {
 	u := fmt.Sprintf("realtime/v%s/intraday/meta", s.client.apiVersion)
-	u, err := addOptions(u, BasicOptions{SymbolID: symbolID, APIToken: s.client.apiToken})
-	if err != nil {
-		return nil, err
-	}
-
-	u, err = addOptions(u, opts)
+	u, err := addOptions(u, IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot})
 	if err != nil {
 		return nil, err
 	}

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/google/go-querystring/query"
@@ -90,15 +91,23 @@ func NewClient(apiToken string) *Client {
 
 // NewRequest creates an API request.
 func (c *Client) NewRequest(method, urlStr string) (*http.Request, error) {
+	if !strings.HasSuffix(c.baseURL.Path, "/") {
+		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.baseURL)
+	}
+
 	u, err := c.baseURL.Parse(urlStr)
 	if err != nil {
 		return nil, err
 	}
+
 	req, err := http.NewRequest(method, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", c.userAgent)
+
+	if c.userAgent != "" {
+		req.Header.Set("User-Agent", c.userAgent)
+	}
 	return req, nil
 }
 

@@ -63,6 +63,10 @@ func testIntradayServiceMeta(t *testing.T, raw string, want interface{}) {
 		t.Errorf("Intrady.Meta returned %v, want %v", *meta, want)
 	}
 	const methodName = "Meta"
+	testNewRequestAndDoFailure(t, methodName, client, func() (err error) {
+		_, err = client.Intrady.Meta("2330", false)
+		return err
+	})
 	testBadOptions(t, methodName, func() (err error) {
 		client.apiVersion = "\n"
 		_, err = client.Intrady.Meta("2330", false)

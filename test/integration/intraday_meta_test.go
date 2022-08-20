@@ -11,7 +11,7 @@ import (
 func TestIntrady_Meta(t *testing.T) {
 	m, err := client.Intrady.Meta("2884", false)
 	if err != nil {
-		t.Fatalf("Meta returned error: %v", err)
+		t.Fatalf("Intrady.Meta returned error: %v", err)
 	}
 	if m.Data.Info.Type != "EQUITY" {
 		t.Fatalf("Intrady.Meta returned type: %s want %s", m.Data.Info.Type, "EQUITY")
@@ -21,7 +21,7 @@ func TestIntrady_Meta(t *testing.T) {
 	}
 	m, err = client.Intrady.Meta("2884", true)
 	if err != nil {
-		t.Fatalf("Meta returned error: %v", err)
+		t.Fatalf("Intrady.Meta returned error: %v", err)
 	}
 	if m.Data.Info.Type != "ODDLOT" {
 		t.Fatalf("Intrady.Meta returned type: %s want %s", m.Data.Info.Type, "ODDLOT")
@@ -34,8 +34,8 @@ func TestIntrady_Meta(t *testing.T) {
 func testIntradyMetaError(t *testing.T, c *fugle.Client, symbolID string, want fugle.ErrorResponse) {
 	_, err := c.Intrady.Meta(symbolID, false)
 	if e, ok := err.(*fugle.ErrorResponse); ok {
-		if diff := cmp.Diff(*e, want, cmpopts.IgnoreFields(fugle.ErrorResponse{}, "Response")); diff != "" {
-			t.Errorf("Intrady.Meta mismatch (-want +got):\n%s", diff)
+		if !cmp.Equal(*e, want, cmpopts.IgnoreFields(fugle.ErrorResponse{}, "Response")) {
+			t.Errorf("Intrady.Meta returned %v, want %v", *e, want)
 		}
 	} else {
 		t.Errorf("Intrady.Meta returned %v", err)

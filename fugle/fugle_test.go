@@ -73,6 +73,7 @@ func testURLParseError(t *testing.T, err error) {
 }
 
 func testErrorContains(t *testing.T, e error, want string) {
+	t.Helper()
 	if !strings.Contains(e.Error(), want) {
 		t.Errorf("testErrorContains: err message = %s, want %s", e.Error(), want)
 	}

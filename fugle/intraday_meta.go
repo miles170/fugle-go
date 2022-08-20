@@ -6,34 +6,26 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-// IntradayService handles communication with the intraday related
-// methods of the Fugle API.
-//
-// Fugle API docs: https://developer.fugle.tw/docs/data/intraday/overview
-type IntradayService struct {
-	client *Client
-}
-
 type Meta struct {
-	Market                 string          `json:"market,omitempty"` // (Optional.)
+	Market                 string          `json:"market"`
 	NameZhTw               string          `json:"nameZhTw"`
-	IndustryZhTw           string          `json:"industryZhTw,omitempty"`  // (Optional.)
-	PreviousClose          decimal.Decimal `json:"previousClose,omitempty"` // (Optional.)
+	IndustryZhTw           string          `json:"industryZhTw"`
+	PreviousClose          decimal.Decimal `json:"previousClose"`
 	PriceReference         decimal.Decimal `json:"priceReference"`
-	PriceHighLimit         decimal.Decimal `json:"priceHighLimit,omitempty"` // (Optional.)
-	PriceLowLimit          decimal.Decimal `json:"priceLowLimit,omitempty"`  // (Optional.)
-	CanDayBuySell          bool            `json:"canDayBuySell,omitempty"`  // (Optional.)
-	CanDaySellBuy          bool            `json:"canDaySellBuy,omitempty"`  // (Optional.)
-	CanShortMargin         bool            `json:"canShortMargin,omitempty"` // (Optional.)
-	CanShortLend           bool            `json:"canShortLend,omitempty"`   // (Optional.)
-	TradingUnit            int             `json:"tradingUnit,omitempty"`    // (Optional.)
-	Currency               string          `json:"currency,omitempty"`       // (Optional.)
-	IsTerminated           bool            `json:"isTerminated,omitempty"`   // (Optional.)
-	IsSuspended            bool            `json:"isSuspended,omitempty"`    // (Optional.)
+	PriceHighLimit         decimal.Decimal `json:"priceHighLimit"`
+	PriceLowLimit          decimal.Decimal `json:"priceLowLimit"`
+	CanDayBuySell          bool            `json:"canDayBuySell"`
+	CanDaySellBuy          bool            `json:"canDaySellBuy"`
+	CanShortMargin         bool            `json:"canShortMargin"`
+	CanShortLend           bool            `json:"canShortLend"`
+	TradingUnit            int             `json:"tradingUnit"`
+	Currency               string          `json:"currency"`
+	IsTerminated           bool            `json:"isTerminated"`
+	IsSuspended            bool            `json:"isSuspended"`
 	TypeZhTw               string          `json:"typeZhTw"`
-	Abnormal               string          `json:"abnormal,omitempty"`               // (Optional.)
-	IsUnusuallyRecommended bool            `json:"isUnusuallyRecommended,omitempty"` // (Optional.)
-	IsNewlyCompiled        bool            `json:"isNewlyCompiled,omitempty"`        // (Optional.)
+	Abnormal               string          `json:"abnormal"`
+	IsUnusuallyRecommended bool            `json:"isUnusuallyRecommended"`
+	IsNewlyCompiled        bool            `json:"isNewlyCompiled"`
 }
 
 type MetaData struct {

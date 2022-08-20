@@ -1,6 +1,9 @@
 package fugle
 
-import "time"
+import (
+	"encoding/json"
+	"time"
+)
 
 // IntradayService handles communication with the intraday related
 // methods of the Fugle API.
@@ -8,6 +11,21 @@ import "time"
 // Fugle API docs: https://developer.fugle.tw/docs/data/intraday/overview
 type IntradayService struct {
 	client *Client
+}
+
+type Timestamp struct {
+	time.Time
+}
+
+// UnmarshalJSON handles incoming JSON.
+func (p *Timestamp) UnmarshalJSON(bytes []byte) error {
+	var i int64
+	err := json.Unmarshal(bytes, &i)
+	if err != nil {
+		return err
+	}
+	p.Time = time.Unix(i/1000, i%1000)
+	return nil
 }
 
 type InfoDate time.Time

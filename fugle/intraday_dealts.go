@@ -36,24 +36,15 @@ type DealtsOptions struct {
 }
 
 func (s *IntradayService) Dealts(symbolID string, limit int, offset int, oddLot bool) (*DealtsResponse, error) {
-	u := fmt.Sprintf("realtime/v%s/intraday/dealts", s.client.apiVersion)
-	u, err := addOptions(u, DealtsOptions{
+	url := fmt.Sprintf("realtime/v%s/intraday/dealts", s.client.apiVersion)
+	opts := DealtsOptions{
 		SymbolID: symbolID,
 		APIToken: s.client.apiToken,
 		Limit:    limit,
 		Offset:   offset,
-		OddLot:   oddLot})
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := s.client.NewRequest("GET", u)
-	if err != nil {
-		return nil, err
-	}
-
+		OddLot:   oddLot}
 	resp := &DealtsResponse{}
-	_, err = s.client.Do(req, &resp)
+	err := s.client.Call(url, opts, resp)
 	if err != nil {
 		return nil, err
 	}

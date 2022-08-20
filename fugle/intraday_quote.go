@@ -115,19 +115,10 @@ type QuoteResponse struct {
 }
 
 func (s *IntradayService) Quote(symbolID string, oddLot bool) (*QuoteResponse, error) {
-	u := fmt.Sprintf("realtime/v%s/intraday/quote", s.client.apiVersion)
-	u, err := addOptions(u, IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot})
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := s.client.NewRequest("GET", u)
-	if err != nil {
-		return nil, err
-	}
-
+	url := fmt.Sprintf("realtime/v%s/intraday/quote", s.client.apiVersion)
+	opts := IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot}
 	resp := &QuoteResponse{}
-	_, err = s.client.Do(req, &resp)
+	err := s.client.Call(url, opts, resp)
 	if err != nil {
 		return nil, err
 	}

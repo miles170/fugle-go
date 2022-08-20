@@ -28,19 +28,10 @@ type ChartResponse struct {
 }
 
 func (s *IntradayService) Chart(symbolID string, oddLot bool) (*ChartResponse, error) {
-	u := fmt.Sprintf("realtime/v%s/intraday/chart", s.client.apiVersion)
-	u, err := addOptions(u, IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot})
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := s.client.NewRequest("GET", u)
-	if err != nil {
-		return nil, err
-	}
-
+	url := fmt.Sprintf("realtime/v%s/intraday/chart", s.client.apiVersion)
+	opts := IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot}
 	resp := &ChartResponse{}
-	_, err = s.client.Do(req, &resp)
+	err := s.client.Call(url, opts, resp)
 	if err != nil {
 		return nil, err
 	}

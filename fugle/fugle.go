@@ -130,6 +130,25 @@ func (c *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
 	return resp, err
 }
 
+// Call first creates an API request then sends it and returns the API response.
+func (c *Client) Call(url string, opts interface{}, resp interface{}) error {
+	url, err := addOptions(url, opts)
+	if err != nil {
+		return err
+	}
+
+	req, err := c.NewRequest("GET", url)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.Do(req, &resp)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 type ErrorResponse struct {
 	Response *http.Response // HTTP response that caused this error
 	Details  Error          `json:"error"`

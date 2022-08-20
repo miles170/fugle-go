@@ -211,7 +211,7 @@ func TestTimestamp_UnmarshalJSON(t *testing.T) {
 	}{
 		"Valid": {
 			data:      []byte(`1640567145000`),
-			want:      Timestamp{Time: time.Date(2021, 12, 27, 9, 5, 45, 0, time.Local)},
+			want:      Timestamp{Time: time.Date(2021, 12, 27, 1, 5, 45, 0, time.UTC)},
 			wantError: false,
 		},
 		"Invalid": {

@@ -38,13 +38,8 @@ type Client struct {
 	userAgent string
 
 	// Services used for talking to different parts of the API
-	Intrady *IntradayService
-}
-
-type IntradyOptions struct {
-	SymbolID string `url:"symbolId"`
-	APIToken string `url:"apiToken"`
-	OddLot   bool   `url:"oddLot"`
+	Intrady    *IntradayService
+	MarketData *MarketDataService
 }
 
 // addOptions adds the parameters in opts as URL query parameters to s. opts
@@ -85,6 +80,7 @@ func NewClient(apiToken string) *Client {
 		userAgent:  defaultUserAgent,
 	}
 	c.Intrady = &IntradayService{client: c}
+	c.MarketData = &MarketDataService{client: c}
 	return c
 }
 

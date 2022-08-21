@@ -13,6 +13,12 @@ type IntradayService struct {
 	client *Client
 }
 
+type IntradyOptions struct {
+	SymbolID string `url:"symbolId"`
+	APIToken string `url:"apiToken"`
+	OddLot   bool   `url:"oddLot"`
+}
+
 type Timestamp struct {
 	time.Time
 }

@@ -45,7 +45,7 @@ func TestInfoDate_UnmarshalJSON(t *testing.T) {
 			if err == nil && test.wantError {
 				t.Errorf("InfoDate.UnmarshalJSON returned no error when we expected one")
 			}
-			if !cmp.Equal(test.want, date, cmp.AllowUnexported(InfoDate{})) {
+			if test.want.String() != date.String() {
 				t.Errorf("InfoDate.UnmarshalJSON expected date %v, got %v", test.want, date)
 			}
 		})

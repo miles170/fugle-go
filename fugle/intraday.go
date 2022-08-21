@@ -36,6 +36,10 @@ func (p *Timestamp) UnmarshalJSON(bytes []byte) error {
 
 type InfoDate time.Time
 
+func (d InfoDate) String() string {
+	return time.Time(d).Format("2006-01-02")
+}
+
 // UnmarshalJSON handles incoming JSON.
 func (d *InfoDate) UnmarshalJSON(b []byte) error {
 	t, err := time.Parse("\"2006-01-02\"", string(b))

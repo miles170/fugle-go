@@ -8,12 +8,12 @@ import (
 )
 
 type Dealt struct {
-	At     time.Time       `json:"at"`
-	Bid    decimal.Decimal `json:"bid"`
-	Ask    decimal.Decimal `json:"ask"`
-	Price  decimal.Decimal `json:"price"`
-	Volume int             `json:"volume"`
-	Serial int             `json:"serial"`
+	At     time.Time       `json:"at"`     // 此筆交易的成交時間
+	Bid    decimal.Decimal `json:"bid"`    // 此筆交易的買進價
+	Ask    decimal.Decimal `json:"ask"`    // 此筆交易的賣出價
+	Price  decimal.Decimal `json:"price"`  // 此筆交易的成交價
+	Volume int             `json:"volume"` // 此筆交易的成交量
+	Serial int             `json:"serial"` // 此筆交易的序號
 }
 
 type DealtData struct {
@@ -28,13 +28,15 @@ type DealtsResponse struct {
 }
 
 type DealtsOptions struct {
-	SymbolID string `url:"symbolId"`
+	SymbolID string `url:"symbolId"` // 個股、指數識別代碼
 	APIToken string `url:"apiToken"`
-	Limit    int    `url:"limit"`
-	Offset   int    `url:"offset"`
-	OddLot   bool   `url:"oddLot"`
+	Limit    int    `url:"limit"`  // 限制最多回傳的資料筆數
+	Offset   int    `url:"offset"` // 指定從第幾筆後開始回傳
+	OddLot   bool   `url:"oddLot"` // 是否回傳零股行情
 }
 
+// 取得個股當日所有成交資訊（ex: 個股價量、大盤總量）
+// See https://developer.fugle.tw/docs/data/intraday/dealts
 func (s *IntradayService) Dealts(symbolID string, limit int, offset int, oddLot bool) (*DealtsResponse, error) {
 	url := fmt.Sprintf("realtime/v%s/intraday/dealts", s.client.apiVersion)
 	opts := DealtsOptions{

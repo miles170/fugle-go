@@ -9,8 +9,8 @@ type MarketDataService struct {
 }
 
 type MarketDataOptions struct {
-	SymbolID string `url:"symbolId"`
+	SymbolID string `url:"symbolId"` // 個股、指數識別代碼
 	APIToken string `url:"apiToken"`
-	From     string `url:"from"`
-	To       string `url:"to"`
+	From     string `url:"from"` // 開始日期
+	To       string `url:"to"`   // 結束日期
 }

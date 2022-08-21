@@ -14,9 +14,9 @@ type IntradayService struct {
 }
 
 type IntradyOptions struct {
-	SymbolID string `url:"symbolId"`
+	SymbolID string `url:"symbolId"` // 個股、指數識別代碼
 	APIToken string `url:"apiToken"`
-	OddLot   bool   `url:"oddLot"`
+	OddLot   bool   `url:"oddLot"` // 是否回傳零股行情
 }
 
 type Timestamp struct {
@@ -47,12 +47,12 @@ func (d *InfoDate) UnmarshalJSON(b []byte) error {
 }
 
 type Info struct {
-	Date          InfoDate  `json:"date"`
-	Type          string    `json:"type"`
-	Exchange      string    `json:"exchange"`
-	Market        string    `json:"market"`
-	SymbolID      string    `json:"symbolId"`
-	CountryCode   string    `json:"countryCode"`
-	TimeZone      string    `json:"timeZone"`
-	LastUpdatedAt time.Time `json:"lastUpdatedAt"`
+	Date          InfoDate  `json:"date"`          // 本筆資料所屬日期
+	Type          string    `json:"type"`          // ticker 類別
+	Exchange      string    `json:"exchange"`      // 交易所
+	Market        string    `json:"market"`        // 市場別
+	SymbolID      string    `json:"symbolId"`      // 股票代號
+	CountryCode   string    `json:"countryCode"`   // 股票所屬國家ISO2代碼
+	TimeZone      string    `json:"timeZone"`      // 股票所屬時區
+	LastUpdatedAt time.Time `json:"lastUpdatedAt"` // 本筆資料最後更新時間
 }

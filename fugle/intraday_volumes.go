@@ -7,10 +7,10 @@ import (
 )
 
 type Volume struct {
-	Price       decimal.Decimal `json:"price"`
-	Volume      int             `json:"volume"`
-	VolumeAtBid int             `json:"volumeAtBid"`
-	VolumeAtAsk int             `json:"volumeAtAsk"`
+	Price       decimal.Decimal `json:"price"`       // 成交價
+	Volume      int             `json:"volume"`      // 成交量
+	VolumeAtBid int             `json:"volumeAtBid"` // 內盤成交量
+	VolumeAtAsk int             `json:"volumeAtAsk"` // 外盤成交量
 }
 
 type VolumesData struct {
@@ -18,12 +18,13 @@ type VolumesData struct {
 	Volumes []Volume `json:"volumes"`
 }
 
-// See https://developer.fugle.tw/docs/data/intraday/volumes
 type VolumesResponse struct {
 	APIVersion string      `json:"apiVersion"`
 	Data       VolumesData `json:"data"`
 }
 
+// 提供盤中個股即時分價量
+// See https://developer.fugle.tw/docs/data/intraday/volumes
 func (s *IntradayService) Volumes(symbolID string, oddLot bool) (*VolumesResponse, error) {
 	url := fmt.Sprintf("realtime/v%s/intraday/volumes", s.client.apiVersion)
 	opts := IntradyOptions{SymbolID: symbolID, APIToken: s.client.apiToken, OddLot: oddLot}

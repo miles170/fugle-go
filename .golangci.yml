@@ -16,3 +16,8 @@ linters:
     - staticcheck
     - ineffassign
     - unused
+issues:
+  exclude-rules:
+    - linters:
+        - dupl
+      path: _test\.go

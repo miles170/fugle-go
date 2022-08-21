@@ -27,7 +27,7 @@ type CandlesResponse struct {
 
 func (s *MarketDataService) Candles(symbolID string, from time.Time, to time.Time) (*CandlesResponse, error) {
 	url := fmt.Sprintf("marketdata/v%s/candles", s.client.apiVersion)
-	opts := MarketDataOptions{SymbolID: symbolID, APIToken: s.client.apiToken, From: from, To: to}
+	opts := MarketDataOptions{SymbolID: symbolID, APIToken: s.client.apiToken, From: from.Format("2006-01-02"), To: to.Format("2006-01-02")}
 	resp := &CandlesResponse{}
 	err := s.client.Call(url, opts, resp)
 	if err != nil {

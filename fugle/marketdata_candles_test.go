@@ -14,7 +14,6 @@ func testMarketDataServiceCandles(t *testing.T, raw string, want CandlesResponse
 	})
 }
 
-//nolint:dupl
 func TestMarketDataService_Candles_2330(t *testing.T) {
 	raw := `
 	{
@@ -116,7 +115,6 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 	testMarketDataServiceCandles(t, raw, want)
 }
 
-//nolint:dupl
 func TestMarketDataService_Candles_IX0001(t *testing.T) {
 	raw := `
 	{

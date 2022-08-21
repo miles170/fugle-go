@@ -1,7 +1,5 @@
 package fugle
 
-import "time"
-
 // MarketDataService handles communication with the marketdata related
 // methods of the Fugle API.
 //
@@ -11,8 +9,8 @@ type MarketDataService struct {
 }
 
 type MarketDataOptions struct {
-	SymbolID string    `url:"symbolId"`
-	APIToken string    `url:"apiToken"`
-	From     time.Time `url:"from"`
-	To       time.Time `url:"to"`
+	SymbolID string `url:"symbolId"`
+	APIToken string `url:"apiToken"`
+	From     string `url:"from"`
+	To       string `url:"to"`
 }

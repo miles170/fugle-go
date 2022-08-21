@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	Version = "0.3.1"
+	Version = "1.0.0"
 
 	defaultBaseURL    = "https://api.fugle.tw/"
 	defaultUserAgent  = "fugle-go" + "/" + Version

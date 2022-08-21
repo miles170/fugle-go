@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/miles170/fugle-go/0.3/fugle"
+	"github.com/miles170/fugle-go/fugle"
 )
 
 func main() {

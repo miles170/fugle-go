@@ -1,4 +1,4 @@
-module github.com/miles170/fugle-go/0.3
+module github.com/miles170/fugle-go
 
 require github.com/google/go-querystring v1.1.0
 

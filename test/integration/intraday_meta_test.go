@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/miles170/fugle-go/0.3/fugle"
+	"github.com/miles170/fugle-go/fugle"
 )
 
 func TestIntrady_Meta(t *testing.T) {

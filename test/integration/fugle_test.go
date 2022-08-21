@@ -1,6 +1,6 @@
 package integration
 
-import "github.com/miles170/fugle-go/0.3/fugle"
+import "github.com/miles170/fugle-go/fugle"
 
 var (
 	client             *fugle.Client

@@ -8,13 +8,13 @@ import (
 )
 
 type BidAsk struct {
-	Pirce  decimal.Decimal `json:"price"`  // 價格
+	Price  decimal.Decimal `json:"price"`  // 價格
 	Volume int             `json:"volume"` // 數量
 }
 
 type Price struct {
 	At    time.Time       `json:"at"`    // 時間
-	Pirce decimal.Decimal `json:"price"` // 價格
+	Price decimal.Decimal `json:"price"` // 價格
 }
 
 type PriceLimit int
@@ -55,7 +55,7 @@ type Trial struct {
 	At     time.Time       `json:"at"`     // 最新一筆試撮時間
 	Bid    decimal.Decimal `json:"bid"`    // 最新一筆試撮買進價
 	Ask    decimal.Decimal `json:"ask"`    // 最新一筆試撮賣出價
-	Pirce  decimal.Decimal `json:"price"`  // 最新一筆試撮成交價
+	Price  decimal.Decimal `json:"price"`  // 最新一筆試撮成交價
 	Volume int             `json:"volume"` // 最新一筆試撮成交量
 	Serial int             `json:"serial"` // 最新一筆試撮之序號
 }
@@ -64,7 +64,7 @@ type Trade struct {
 	At     time.Time       `json:"at"`     // 最新一筆成交時間
 	Bid    decimal.Decimal `json:"bid"`    // 最新一筆成交買進價
 	Ask    decimal.Decimal `json:"ask"`    // 最新一筆成交賣出價
-	Pirce  decimal.Decimal `json:"price"`  // 最新一筆成交價
+	Price  decimal.Decimal `json:"price"`  // 最新一筆成交價
 	Volume int             `json:"volume"` // 最新一筆成交量
 	Serial int             `json:"serial"` // 最新一筆成交之序號
 }

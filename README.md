@@ -2,7 +2,7 @@
 
 [![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/miles170/fugle-go/fugle)
 [![Test Status](https://github.com/miles170/fugle-go/workflows/tests/badge.svg)](https://github.com/miles170/fugle-go/actions?query=workflow%3Atests)
-[![Test Coverage](https://codecov.io/gh/miles170/fugle-go/branch/main/graph/badge.svg?token=T45IFQ9JQ1)](https://codecov.io/gh/miles170/fugle-go)
+[![Test Coverage](https://codecov.io/gh/miles170/fugle-go/branch/main/graph/badge.svg)](https://codecov.io/gh/miles170/fugle-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/miles170/fugle-go)](https://goreportcard.com/report/github.com/miles170/fugle-go)
 [![Code Climate](https://codeclimate.com/github/miles170/fugle-go/badges/gpa.svg)](https://codeclimate.com/github/miles170/fugle-go)
 

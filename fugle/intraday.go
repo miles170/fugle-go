@@ -2,6 +2,7 @@ package fugle
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -35,18 +36,18 @@ func (p *Timestamp) UnmarshalJSON(bytes []byte) error {
 	return nil
 }
 
-type InfoDate struct {
+type Date struct {
 	Year  int
 	Month time.Month
 	Day   int
 }
 
-func (d InfoDate) String() string {
-	return time.Date(d.Year, d.Month, d.Day, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
+func (d Date) String() string {
+	return fmt.Sprintf("%04d-%02d-%02d", d.Year, d.Month, d.Day)
 }
 
 // UnmarshalJSON handles incoming JSON.
-func (d *InfoDate) UnmarshalJSON(b []byte) error {
+func (d *Date) UnmarshalJSON(b []byte) error {
 	t, err := time.Parse("\"2006-01-02\"", string(b))
 	if err != nil {
 		return err
@@ -59,7 +60,7 @@ func (d *InfoDate) UnmarshalJSON(b []byte) error {
 }
 
 type Info struct {
-	Date          InfoDate  `json:"date"`          // 本筆資料所屬日期
+	Date          Date      `json:"date"`          // 本筆資料所屬日期
 	Type          string    `json:"type"`          // ticker 類別
 	Exchange      string    `json:"exchange"`      // 交易所
 	Market        string    `json:"market"`        // 市場別

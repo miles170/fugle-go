@@ -21,23 +21,23 @@ func testIntradayServiceErros(t *testing.T, methodName string, f func(*Client) (
 func TestInfoDate_UnmarshalJSON(t *testing.T) {
 	var testCases = map[string]struct {
 		data      []byte
-		want      InfoDate
+		want      Date
 		wantError bool
 	}{
 		"Valid": {
 			data:      []byte(`"2022-08-19"`),
-			want:      InfoDate{2022, 8, 19},
+			want:      Date{2022, 8, 19},
 			wantError: false,
 		},
 		"Invalid": {
 			data:      []byte(`"022-08-19`),
-			want:      InfoDate{},
+			want:      Date{},
 			wantError: true,
 		},
 	}
 	for name, test := range testCases {
 		t.Run(name, func(t *testing.T) {
-			date := InfoDate{}
+			date := Date{}
 			err := date.UnmarshalJSON(test.data)
 			if err != nil && !test.wantError {
 				t.Errorf("InfoDate.UnmarshalJSON returned an error when we expected nil")

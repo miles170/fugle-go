@@ -59,7 +59,7 @@ func TestIntradayService_Meta_2330(t *testing.T) {
 		APIVersion: "0.3.0",
 		Data: MetaData{
 			Info: Info{
-				Date:          InfoDate{2022, 8, 19},
+				Date:          Date{2022, 8, 19},
 				Type:          "EQUITY",
 				Exchange:      "TWSE",
 				Market:        "TSE",
@@ -123,7 +123,7 @@ func TestIntradayService_Meta_IX0001(t *testing.T) {
 		APIVersion: "0.3.0",
 		Data: MetaData{
 			Info: Info{
-				Date:          InfoDate{2022, 8, 19},
+				Date:          Date{2022, 8, 19},
 				Type:          "INDEX",
 				Exchange:      "TWSE",
 				Market:        "TSE",

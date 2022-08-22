@@ -8,7 +8,7 @@ import (
 )
 
 type Candle struct {
-	Date   InfoDate        `json:"date"`   // 本筆資料所屬日期
+	Date   Date            `json:"date"`   // 本筆資料所屬日期
 	Open   decimal.Decimal `json:"open"`   // 開盤價
 	High   decimal.Decimal `json:"high"`   // 最高價
 	Low    decimal.Decimal `json:"low"`    // 最低價

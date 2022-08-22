@@ -71,7 +71,7 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 		Market:   "TSE",
 		Candles: []Candle{
 			{
-				Date:   InfoDate{2022, 8, 19},
+				Date:   Date{2022, 8, 19},
 				Open:   decimal.NewFromInt(519),
 				High:   decimal.NewFromInt(523),
 				Low:    decimal.NewFromInt(517),
@@ -79,7 +79,7 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 				Volume: 14235983,
 			},
 			{
-				Date:   InfoDate{2022, 8, 18},
+				Date:   Date{2022, 8, 18},
 				Open:   decimal.NewFromInt(520),
 				High:   decimal.NewFromInt(521),
 				Low:    decimal.NewFromInt(519),
@@ -87,7 +87,7 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 				Volume: 18721898,
 			},
 			{
-				Date:   InfoDate{2022, 8, 17},
+				Date:   Date{2022, 8, 17},
 				Open:   decimal.NewFromInt(524),
 				High:   decimal.NewFromInt(527),
 				Low:    decimal.NewFromInt(521),
@@ -95,7 +95,7 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 				Volume: 28461939,
 			},
 			{
-				Date:   InfoDate{2022, 8, 16},
+				Date:   Date{2022, 8, 16},
 				Open:   decimal.NewFromInt(526),
 				High:   decimal.NewFromInt(526),
 				Low:    decimal.NewFromInt(523),
@@ -103,7 +103,7 @@ func TestMarketDataService_Candles_2330(t *testing.T) {
 				Volume: 21234122,
 			},
 			{
-				Date:   InfoDate{2022, 8, 15},
+				Date:   Date{2022, 8, 15},
 				Open:   decimal.NewFromInt(520),
 				High:   decimal.NewFromInt(524),
 				Low:    decimal.NewFromInt(519),
@@ -172,7 +172,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 		Market:   "TSE",
 		Candles: []Candle{
 			{
-				Date:   InfoDate{2022, 8, 19},
+				Date:   Date{2022, 8, 19},
 				Open:   decimal.NewFromFloat(15394.36),
 				High:   decimal.NewFromFloat(15458.45),
 				Low:    decimal.NewFromFloat(15346.26),
@@ -180,7 +180,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 				Volume: 5696021842,
 			},
 			{
-				Date:   InfoDate{2022, 8, 18},
+				Date:   Date{2022, 8, 18},
 				Open:   decimal.NewFromFloat(15384.73),
 				High:   decimal.NewFromFloat(15396.76),
 				Low:    decimal.NewFromFloat(15311.22),
@@ -188,7 +188,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 				Volume: 5017166848,
 			},
 			{
-				Date:   InfoDate{2022, 8, 17},
+				Date:   Date{2022, 8, 17},
 				Open:   decimal.NewFromFloat(15423.44),
 				High:   decimal.NewFromFloat(15475.89),
 				Low:    decimal.NewFromFloat(15390.84),
@@ -196,7 +196,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 				Volume: 5511618302,
 			},
 			{
-				Date:   InfoDate{2022, 8, 16},
+				Date:   Date{2022, 8, 16},
 				Open:   decimal.NewFromFloat(15435.04),
 				High:   decimal.NewFromFloat(15451.83),
 				Low:    decimal.NewFromFloat(15392.49),
@@ -204,7 +204,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 				Volume: 5723526118,
 			},
 			{
-				Date:   InfoDate{2022, 8, 15},
+				Date:   Date{2022, 8, 15},
 				Open:   decimal.NewFromFloat(15332.92),
 				High:   decimal.NewFromFloat(15437.23),
 				Low:    decimal.NewFromFloat(15315.12),

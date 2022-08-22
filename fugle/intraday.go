@@ -34,10 +34,14 @@ func (p *Timestamp) UnmarshalJSON(bytes []byte) error {
 	return nil
 }
 
-type InfoDate time.Time
+type InfoDate struct {
+	Year  int
+	Month time.Month
+	Day   int
+}
 
 func (d InfoDate) String() string {
-	return time.Time(d).Format("2006-01-02")
+	return time.Date(d.Year, d.Month, d.Day, 0, 0, 0, 0, time.UTC).Format("2006-01-02")
 }
 
 // UnmarshalJSON handles incoming JSON.
@@ -46,7 +50,10 @@ func (d *InfoDate) UnmarshalJSON(b []byte) error {
 	if err != nil {
 		return err
 	}
-	*d = InfoDate(t)
+	year, month, day := t.Date()
+	d.Year = year
+	d.Month = month
+	d.Day = day
 	return nil
 }
 

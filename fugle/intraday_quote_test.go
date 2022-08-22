@@ -142,7 +142,7 @@ func TestIntradayService_Quote_2330(t *testing.T) {
 		APIVersion: "0.3.0",
 		Data: QuoteData{
 			Info: Info{
-				Date:          InfoDate(time.Date(2022, 8, 19, 0, 0, 0, 0, time.UTC)),
+				Date:          InfoDate{2022, 8, 19},
 				Type:          "EQUITY",
 				Exchange:      "TWSE",
 				Market:        "TSE",
@@ -299,7 +299,7 @@ func TestIntradayService_Quote_IX0001(t *testing.T) {
 		APIVersion: "0.3.0",
 		Data: QuoteData{
 			Info: Info{
-				Date:          InfoDate(time.Date(2022, 8, 19, 0, 0, 0, 0, time.UTC)),
+				Date:          InfoDate{2022, 8, 19},
 				Type:          "INDEX",
 				Exchange:      "TWSE",
 				Market:        "TSE",

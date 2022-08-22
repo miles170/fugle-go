@@ -101,7 +101,7 @@ func testService(t *testing.T, pattern string, methodName string, raw string, wa
 	if err != nil {
 		t.Errorf("%s returned error: %v", methodName, err)
 	}
-	if !cmp.Equal(resp, want, cmp.AllowUnexported(InfoDate{})) {
+	if !cmp.Equal(resp, want) {
 		t.Errorf("%s returned %v, want %v", methodName, resp, want)
 	}
 	testNewRequestAndDoFailure(t, methodName, client, func() error {

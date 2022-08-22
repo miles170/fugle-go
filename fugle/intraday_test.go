@@ -26,7 +26,7 @@ func TestInfoDate_UnmarshalJSON(t *testing.T) {
 	}{
 		"Valid": {
 			data:      []byte(`"2022-08-19"`),
-			want:      InfoDate(time.Date(2022, 8, 19, 0, 0, 0, 0, time.UTC)),
+			want:      InfoDate{2022, 8, 19},
 			wantError: false,
 		},
 		"Invalid": {

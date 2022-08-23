@@ -60,8 +60,8 @@ volumes, err := client.Intrady.Volumes("2884", false)
 
 ```go
 candles, err := client.MarketData.Candles("2884",
-    time.Date(2022, 8, 15, 0, 0, 0, 0, time.UTC),
-    time.Date(2022, 8, 21, 0, 0, 0, 0, time.UTC))
+		fugle.Date{Year: 2022, Month: 8, Day: 15},
+		fugle.Date{Year: 2022, Month: 8, Day: 21})
 ```
 
 ## License

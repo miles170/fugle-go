@@ -2,7 +2,6 @@ package fugle
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/shopspring/decimal"
 )
@@ -26,9 +25,9 @@ type CandlesResponse struct {
 
 // 提供歷史股價資料，包含開高低收量 (OHLCV)。歷史資料目前設計單次呼叫的資料區間以一年為限；資料區間最遠可回溯至 2010 年！
 // See https://developer.fugle.tw/docs/data/marketdata/candles
-func (s *MarketDataService) Candles(symbolID string, from time.Time, to time.Time) (*CandlesResponse, error) {
+func (s *MarketDataService) Candles(symbolID string, from Date, to Date) (*CandlesResponse, error) {
 	url := fmt.Sprintf("marketdata/v%s/candles", s.client.apiVersion)
-	opts := MarketDataOptions{SymbolID: symbolID, APIToken: s.client.apiToken, From: from.Format("2006-01-02"), To: to.Format("2006-01-02")}
+	opts := MarketDataOptions{SymbolID: symbolID, APIToken: s.client.apiToken, From: from.String(), To: to.String()}
 	resp := &CandlesResponse{}
 	err := s.client.Call(url, opts, resp)
 	if err != nil {

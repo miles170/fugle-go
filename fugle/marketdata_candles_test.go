@@ -2,14 +2,13 @@ package fugle
 
 import (
 	"testing"
-	"time"
 
 	"github.com/shopspring/decimal"
 )
 
 func testMarketDataServiceCandles(t *testing.T, raw string, want CandlesResponse) {
 	testMarketDataService(t, "candles", raw, &want, func(client *Client) (interface{}, error) {
-		resp, err := client.MarketData.Candles("", time.Now(), time.Now())
+		resp, err := client.MarketData.Candles("", Date{2022, 8, 23}, Date{2022, 8, 23})
 		return resp, err
 	})
 }
@@ -218,7 +217,7 @@ func TestMarketDataService_Candles_IX0001(t *testing.T) {
 
 func TestMarketDataService_CandlesErrors(t *testing.T) {
 	testMarketDataServiceErros(t, "candles", func(client *Client) (interface{}, error) {
-		resp, err := client.MarketData.Candles("", time.Now(), time.Now())
+		resp, err := client.MarketData.Candles("", Date{2022, 8, 23}, Date{2022, 8, 23})
 		return resp, err
 	})
 }
